@@ -1,6 +1,10 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
+<meta name="viewport" content="width=1024" />
+<meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
 <script>
  /**
  * impress.js
@@ -13,44 +17,49 @@
  *
  * ------------------------------------------------
  *  author:  yamazaki daisuke
- *  version: 0.1
+ *  version: 1.1.7
  */
 </script>
-<meta name="viewport" content="width=1024" />
-<meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<title>impress.js design</title>
+<title>impress.js design [v1.1.7]</title>
 <link href='http://fonts.googleapis.com/css?family=Coda+Caption:800' rel='stylesheet' type='text/css'>
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.17.custom.css">
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
 <link rel="stylesheet" href="css/impress_design.css">
+<script src="ckeditor.js"></script>
 </head>
 <body>
 <!-- block -->
-<div id="hedder"><span>Creating a slide:</span> <button onclick="addDiv()">Slide[add]</button> ＞ <button onclick="comp(1)">Check[View]</button> ＞ <button onclick="souceViewMain()">Build[Code]</button> 　<!-- <button onclick="clearSave()">Remove[SaveData]</button> ＞ --><button class="reset_btn" onclick="clearSaveAll()">Reset[AllData]</button>　<button id="help">？</button></div>
+<div id="hedder"><span>Creating a slide:</span> <button onclick="addDiv()">Slide[add]</button> > <button onclick="comp(1)">Check[View]</button> > <button onclick="souceViewMain()">Build[Code]</button> <button class="reset_btn" onclick="clearSaveAll()">Reset[AllData]</button> <button id="help" onclick="helpAltClose()">?</button></div>
 <div id="main"></div>
-<div id="dh_foot"><p><span> presentation tool based on the power of CSS3 transforms and transitions in modern browsers.</span>  " Safari or Chrome " </p></div>
+<div id="dh_foot"><p><span> presentation tool based on the power of CSS3 transforms and transitions in modern browsers.</span>  " Chrome or Safari" </p></div>
 <!-- block -->
 
+<div id="dragarea" style="display: none">
+    <div id="field" ondragover="onDragOver(event);" ondragleave="onDragLeave(event);" ondrop="onDrop(event);"><div class="closex" onclick="editImgHide()">[x]</div>Drop Image</div> 
+</div>
 <div id="alttimer" style="display:none"></div>
 <div id="footer" style="display:none"></div>
 <div id="editblock" style="display: none;"></div>
 <div id="getHelpEcho" style="display: none;"></div>
 <div id="getAlterEcho" style="display: none;"></div>
 <script src="js/impress_design.js"></script>
-<div id="dh">   
+<div id="dh">
     <div id="codeviewblock" style="display:none">
-        <div id="dod_select_btn" class="code"><button class="code_select_btn" onclick="selectCode()">Select [AllCode]</button>　<button onclick="backpage()">Back [page]</button></div>
-        <div id="dh_com" class="code"><a href="https://github.com/bartaz/impress.js" target="_blank">"impress.js”</a>のindex.htmlソースコードと差し替えてください。<br>Check[View]で表示したHTMLを”名前を付けて保存”しimpress.jsフォルダに入れて利用もできます。</div>
+        
+        <div id="dh_com" class="code">
+            <p><strong>How to use.</strong><br>
+               1.Code [Select] button: <a href="https://github.com/bartaz/impress.js" target="_blank">"impress.js”</a>index.html "Copy and paste the code"<br>
+               2.File [Download] button: How to use to download the html file you created, and replace index.html<br>
+               3.Back to editing</p>
+        </div>
+        <div id="dod_select_btn" class="code"><button class="code_select_btn" onclick="selectCode()">1.Code [Select]</button> or <button class="code_select_btn" onclick="download()">2.File [Download]</button> or <button onclick="backpage()">Back [page]</button></div>
         <textArea id="localData" cols="120" rows="70"></textArea>
+        <form name="html_text">
+            <input type="hidden" name="download_text" />
+        </form>
     </div>
 </div>
-<script>
-    $("#help").click(function(){
-       helpAltClose();
-    });
-</script>
 </body>
 </html>

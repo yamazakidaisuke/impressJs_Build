@@ -14,9 +14,15 @@
 
 //
 CKEDITOR.config.toolbar = [
-['-','Templates','-'],
+    ['-','Templates','-'],
 ['Format','Font','FontSize', 'TextColor'],
+//['PasteText','PasteFromWord'],
+//['NumberedList','BulletedList'],
+//'Outdent','Indent','Blockquote',
 ['Undo','Redo'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+//['SelectAll','RemoveFormat','Link','Unlink',
+//,['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField','-','Find','Replace']
+//['Table'],
 ['Image','Source'],['-','Templates','-']
 ];
 CKEDITOR.config.resize_enabled = false; 
@@ -34,21 +40,21 @@ var G ={
     "slide_count":0,
     "select": "",
     "img_count":0,
-    "drag_text":'<div class="closex" onclick="editImgHide()">[ X ]</div>drop the image'
+    "drag_text":'<div class="closex" onclick="editImgHide()">[x]</div>drop Image'
 };
 var EditStr = new Array(
-    '<div id="start" style="font-size:44px;"><q>Wait…impress.js</q><p>Use a spacebar or arrow keys to navigate</p></div>',
-    '<div id="ing" style="font-size:44px;"><p><b class="positioning">Yamazaki Daisuke</b>Digital Hollywood Teacher<b class="rotating">"@it,SoftwareDesign,Nikkei software,ITPro,WebCreators"</b><b class="scaling">Writing activities</b>Work primarily to build business applications</p></div>',
-    '<q style="font-size:44px;">" HTML5!! "<br>Let\' play!!</q><p> [ HTML5 / Javascript / CSS3 / API / PHP / ... ] </p>',
-    '<div style="font-size:44px;"><q>What is impress.js ?</q><p>impress.js is a presentation library (license MIT) open source utilizing CSS3.</p></div></p></div>',
-    '<div id="title" style="font-size:44px;"><h1>* Feature *</h1><q>Behavior flashy slide.Behavior flashy slide.Behavior flashy slide.</q></div>',
-    '<div id="big" style="font-size:44px;"><p>visualize your <b>big</b> <span class="thoughts">thoughts</span></p></div>',
-    '<div id="tiny"><p style="font-size:40px;margin-top: 20px;">and <b>tiny</b> ideas</p></div>',
-    '<div id="its" style="font-size:42px;"><q>Recommended browser ： Chrome(Safari) </q><p>power of CSS3 transforms and transitions in modern browsers.</p></div>',
-    '<div id="bored" style="font-size:42px;"><div class="time"></div><q>How to operate the Timer app.</q><p>Starting [Space]</p><p>Stop [Space]</p><p>Initialization [0]Key.</p></div>',
-    '<div id="imagination" style="font-size:42px;"><p>the only <b>limit</b> is your <b class="imagination">imagination</b></p></div>',
+    '<div id="start" style="font-size:44px;"><q>Wait…impress.js</q><p>Key[Right][→]で操作</p></div>',
+    '<div id="ing" style="font-size:44px;"><p><b class="positioning">山崎 大助（GENOVA）</b>デジタルハリウッド講師<b class="rotating">”@it、SoftwareDesign、日経ソフトウエア、ITPro、WebCreators</b><b class="scaling">等のWeb業界誌での執筆</b>主にクリエイトする仕事が本業（アプリとか）</p></div>',
+    '<q style="font-size:44px;">” HTML5アプリ作ろうぜ！” <br>　連載がスタートします！！</q><p>最近流行りの 「 HTML5 ・ Jsライブラリ ・ CSS3 ・  API 」の紹介、またそれらを組み合わせた「 sampleアプリケーションの紹介と解説 」を厳選し執筆していきます！!</p>',
+    '<div style="font-size:44px;"><q>本編： impress.js とは？</q><p>CSS3を活用したオープンソース（ライセンスMIT）のプレゼンテーションJavaScriptライブラリです。</p></div></p></div>',
+    '<div id="title" style="font-size:44px;"><h1>* 特徴 *</h1><q>ド派手なスライド動作</q><q>ド派手なスライド動作</q><q>ド派手なスライド動作</q></div>',
+    '<div id="big" style="font-size:44px;"><p>visualize your <b>big</b> <span class="thoughts">thoughts</span></p><p>あなたのの大きな考えと・・・</p></div>',
+    '<div id="tiny"><p style="font-size:40px;margin-top: 20px;">and <b>tiny</b> ideas</p> <p>小さな <b>アイデア</b> を視覚化します</p></div>',
+    '<div id="its" style="font-size:42px;"><q>対象ブラウザ： Safari(Chrome) </q><p>power of CSS3 transforms and transitions in modern browsers.</p></div>',
+    '<div id="bored" style="font-size:42px;"><div class="time"></div><q>Timer操作方法</q><p>Timer起動は[Space]キー</p><p>Timer停止は[Space]キー</p><p>Timer初期化[0]キー</p></div>',
+    '<div id="imagination" style="font-size:42px;"><p>スライドのコツ <b>overview</b> <br> <b class="imagination">全体像を見る</b></p></div>',
     '<div id="one-more-thing" style="font-size:42px;"><p>Enjoy yourself.</p></div>',
-    '<div id="its-in-3d" style="font-size:42px;"><p><span class="one">Adhering </span> <span class="two">to </span> <span class="three">their </span> <span class="four">beliefs </span> <span class="five">to </span> move </p><span class="six">forward.</span></div>'
+    '<div id="its-in-3d" style="font-size:42px;"><p><span class="one">自分</span> <span class="two">の</span> <span class="three">信念</span> <span class="four">を</span> <span class="five">つらぬき</span> ！</p><span class="six">前進すること。</span></div>'
 );
 var TempVal ={
     "rot": new Array(),
@@ -140,7 +146,7 @@ var moves = function (i){
         });
     }
 };
-//Slide add:Create
+//Slide add: Create
 var addDiv=function(){
     var i = parseInt(G.i);
     i++;
@@ -155,7 +161,7 @@ var addDivSub=function(i){
     $("#main").append('<div id="sheet'+ i +'" class="ui-widget-content sheet step"><p>' + btn + '</p></div>');
     $("#sheet"+i).css({"position":"absolute","top": (G.divarea)+"px","left":G.divarea+"px","display": "block"});
 };
-//Demo page:Data set
+//Demo page: Data set
 var comp=function(flg){
     G.str = "";
     for(var x=0;x<G.i;x++){
@@ -302,13 +308,13 @@ var souceViewTop = function() {
         s += '<body>\n';
         s += '<div id="impress" class="impress-not-supported">\n';
         s += '<div class="time"></div>\n';
-        s += '<div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10"><q>［Overview］</q></div>\n';
-        s += '\n\n\n\n<!-- *** Modification of sentence, please change the following block. *** -->\n';
+        s += '<div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10"><q>［全体像］</q></div>\n';
+        s += '\n\n\n\n<!-- *** 以下スライドページ：文章の修正は下記ブロックを変更してください。 *** -->\n';
         return s;
 };
 //Soucecode-bottom: Create
 var souceViewBottom = function() {
-        var s = '\n<!-- *** Modification of sentence, please change the following block. *** -->\n\n\n\n'; 
+        var s = '\n<!-- *** 以下スライドページ：文章の修正は下記ブロックを変更してください。 *** -->\n\n\n\n'; 
         s += '</div>\n'; 
         s += '<div class="hint"><p>Use a spacebar or arrow keys to navigate</p></div>\n';
         s += '<div id="timerblock"><span id="tflg_view"></span> <span id="timer_view"></span></div>\n';
@@ -349,9 +355,9 @@ var backpage = function (){
 };
 //LocalStrage: All clear
 var clearSaveAll = function (){
-    if(confirm('Delete all the stored data. Are you sure you want to delete?')){
+    if(confirm('保存データを全て削除します。本当に削除しますか？')){
         localStorage.clear();
-        alttimer('<p class="title">Reset [AllData]</p><p class="t1">I delete all the stored information.</p>');
+        alttimer('<p class="title">Reset [AllData]</p><p class="t1">保存されている スライドの位置・属性・文章 全て削除しました。</p>');
     }
 };
 //LocalStrage: set
@@ -376,7 +382,7 @@ var getComm = function(i){
 var selectPage = function(ob,i){
      var get;
     html = get = EditStr[$(ob).val()];
-    var btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">Save</button>';
+    var btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">保存</button>';
     var close = '<div id="editetitle" class="alt_close"><div class="editclose" onclick="editHide();">[×] -Slide'+i+'</div>- '+G.select+btn+'</div>';
     var edit = close;
     edit += '<div id="editor'+i+'"></div>';
@@ -385,8 +391,20 @@ var selectPage = function(ob,i){
      $('#editblock').draggable();
      createEditor(i);
 };
+/*
+//
+var selectCreates=function(i){
+    var select = '<select class="removeEditor" onchange="selectPage(this,'+i+');"><option value="">テンプレート</option>';
+    for(var x=0;x<EditStr.length; x++){
+        select += '<option value="'+x+'">['+x+']</option>';
+    }
+    select += '</select>';
+    return select;
+};
+*/
 //
 var editBlock = function(i){
+    //G.select = selectCreates(i);
     alterHide();
     var get = getComm(i);
     if(get==undefined || get==null){
@@ -396,9 +414,9 @@ var editBlock = function(i){
     }
     var btn="";
     if(chromeChk()==1){
-        btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">Save</button><button onclick="editImgShow()" class="removeEditor">Image</button>';
+        btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">保存</button><button onclick="editImgShow()" class="removeEditor">画像</button>';
     }else{
-        btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">Save</button>';
+        btn   = '<button class="removeEditor" onclick="removeEditor('+i+');">保存</button>';
     }
     var close = '<div id="editetitle" class="alt_close"><div class="editclose" onclick="editHide();">[×] -Slide'+i+'</div>- '+btn+ " "+G.select+'</div>';
     var edit = close;
@@ -408,11 +426,14 @@ var editBlock = function(i){
     $('#editblock').draggable();
     createEditor(i);
 };
-//ChromeCheck
 var chromeChk = function(){
     if ((navigator.userAgent.indexOf("Mac",0)!=-1) && (navigator.userAgent.indexOf("Chrome") != -1)){
+        //version="mac_other";
+        //alert("Mac Chrome");
         return 1;
     }else if((navigator.userAgent.indexOf("Win",0)!=-1) && (navigator.userAgent.indexOf("Chrome") != -1)){
+        //version="win_other";
+        //alert("Win Chrome");
         return 1;
     }
     return 0;
@@ -422,6 +443,8 @@ var editHide = function (){
     $("#getAlterEcho").fadeIn(G.effecttime);
     $("#editblock").fadeOut(G.effecttime);
 };
+
+
 //DragArea:Event
 var editImgShow = function(){
    $("#dragarea").fadeIn(G.effecttime); 
@@ -430,18 +453,18 @@ var editImgHide = function(){
    $("#dragarea").fadeOut(G.effecttime);
    $("#field").html(G.drag_text);
 };
-//
+// 範囲内
 var onDragOver = function (e) {
   e.preventDefault();
   $("#field").css("border","10px solid #CCC");
-};
-//
+}
+// 範囲外
 var onDragLeave = function(e) {
   e.preventDefault();
   $("#field").css("border","10px solid #160ACA");
   $("#field").html(G.drag_text);
-};
-//DropEvent
+}
+// ドロップ
 var onDrop = function(e) {
   e.preventDefault();
   $("#field").html("");
@@ -452,15 +475,15 @@ var onDrop = function(e) {
       reader.onload = function(event) {
         element = document.createElement("a");
         element.setAttribute("href", "javascript: void(0);");
-        element.innerHTML = '<div class="edrop"><div class="closex" onclick="editImgHide()">[x]</div>Edit in drop.</div><img src="' + event.target.result + '" class="image" id="image' + G.img_count + '" />';
+        element.innerHTML = '<div class="edrop"><div class="closex" onclick="editImgHide()">[x]</div>Editへドロップ</div><img src="' + event.target.result + '" class="image" id="image' + G.img_count + '" />';
         $("#field").append(element);
         G.img_count++;
       };
       reader.readAsDataURL(e.dataTransfer.files[i]);
     }
   }
-};
-//
+}
+
 var download = function(){
     var sh = souceViewTop();
     var sb = souceViewBottom();

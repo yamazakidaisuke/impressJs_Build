@@ -283,7 +283,7 @@ var editBlock = function(i){
     var left  = $("#sheet"+i).offset().left+G.layoutX;
     var close = '<div id="editetitle" onclick="editHide();" class="alt_close">[×] -Slide'+i+'- </div>';
     var btn   = '<button onclick="addComm('+i+')">保存</button>';
-    var edit  = close+'<p>文章入力(HTMLタグを入力できます。)：<br><textArea id="slidestr'+i+'" cols="40" rows="5" autocomplete="on" list="autohtml">'+get+'</textArea>'+btn+'</p>';
+    var edit  = close+'<p>文章入力(HTMLタグを入力できます。)：<br><textArea id="slidestr'+i+'" cols="40" rows="5">'+get+'</textArea>'+btn+'</p>';
     $("#editblock").css({
        "top":top,"left":left 
     });

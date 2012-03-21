@@ -1,9 +1,6 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1024" />
-<meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
 <script>
  /**
  * impress.js
@@ -19,6 +16,9 @@
  *  version: 0.1
  */
 </script>
+<meta name="viewport" content="width=1024" />
+<meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
 <title>impress.js design</title>
 <link href='http://fonts.googleapis.com/css?family=Coda+Caption:800' rel='stylesheet' type='text/css'>
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -44,16 +44,9 @@
     <div id="codeviewblock" style="display:none">
         <div id="dod_select_btn" class="code"><button class="code_select_btn" onclick="selectCode()">Select [AllCode]</button>　<button onclick="backpage()">Back [page]</button></div>
         <div id="dh_com" class="code"><a href="https://github.com/bartaz/impress.js" target="_blank">"impress.js”</a>のindex.htmlソースコードと差し替えてください。<br>Check[View]で表示したHTMLを”名前を付けて保存”しimpress.jsフォルダに入れて利用もできます。</div>
-        
         <textArea id="localData" cols="120" rows="70"></textArea>
     </div>
 </div>
-<input type="text" name="yourarea" autocomplete="on" list="autohtml">
-<datalist id="autohtml">
-    <option value="<p></p>">
-    <option value="<q></q>">
-<option value="池袋">
-</datalist>
 <script>
     $("#help").click(function(){
        helpAltClose();
